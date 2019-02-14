@@ -7,45 +7,117 @@ using System.Diagnostics;
 
 namespace Hangman_Game
 {
-    public partial class object_7 : Form
+    public partial class Hangman_Form : Form
     {
-        List<string> questionList = new List<string>();
+        List<string> questionList = new List<string>(new string[] {
+            "The name of a transport vehicle?",
+            "What day is the first of the week?",
+            "What is commonly purchased from a takeway?",
+            "A country shaped like a boot?",
+            "Football's coming... ?",
+        });
+
+        private List<Label> listOfLetterLabels = new List<Label>();
+        private List<PictureBox> listOfHangmanParts = new List<PictureBox>();
+        private List<Label> listOfHangmanFields = new List<Label>();
+        private List<Label> listOfUnderlines = new List<Label>();
+
+        private static List<char> chosenLetters = new List<char>();
+
         private static string selectedQuestion = String.Empty;
         private static string answer = String.Empty;
-        private static int numOfIncorrectAttempts = 0;
         private static int numOfCorrectGuesses = 0;
+        private static int numOfIncorrectGuesses = 0;
+        private static bool gameCompeleted = false;
 
-        public object_7()
+        public Hangman_Form()
         {
             InitializeComponent();
 
-            CreateQuestions();
+            GetGameObjects();
 
             PlayGame();
         }
 
-        private void CreateQuestions()
+        private void GetGameObjects()
         {
-            questionList.Add("A name of a transport vehicle?");
-            questionList.Add("What day is the first of the week?");
-            questionList.Add("What food item is commonly purchased from an takeway?");
-            questionList.Add("Winne The ... ?");
-            questionList.Add("Football's coming  ... ?");
+            listOfLetterLabels.Add(lbl_Letter_A);
+            listOfLetterLabels.Add(lbl_Letter_B);
+            listOfLetterLabels.Add(lbl_Letter_C);
+            listOfLetterLabels.Add(lbl_Letter_D);
+            listOfLetterLabels.Add(lbl_Letter_E);
+            listOfLetterLabels.Add(lbl_Letter_F);
+            listOfLetterLabels.Add(lbl_Letter_G);
+            listOfLetterLabels.Add(lbl_Letter_H);
+            listOfLetterLabels.Add(lbl_Letter_I);
+            listOfLetterLabels.Add(lbl_Letter_J);
+            listOfLetterLabels.Add(lbl_Letter_K);
+            listOfLetterLabels.Add(lbl_Letter_L);
+            listOfLetterLabels.Add(lbl_Letter_M);
+            listOfLetterLabels.Add(lbl_Letter_N);
+            listOfLetterLabels.Add(lbl_Letter_O);
+            listOfLetterLabels.Add(lbl_Letter_P);
+            listOfLetterLabels.Add(lbl_Letter_Q);
+            listOfLetterLabels.Add(lbl_Letter_R);
+            listOfLetterLabels.Add(lbl_Letter_S);
+            listOfLetterLabels.Add(lbl_Letter_T);
+            listOfLetterLabels.Add(lbl_Letter_U);
+            listOfLetterLabels.Add(lbl_Letter_V);
+            listOfLetterLabels.Add(lbl_Letter_W);
+            listOfLetterLabels.Add(lbl_Letter_X);
+            listOfLetterLabels.Add(lbl_Letter_Y);
+            listOfLetterLabels.Add(lbl_Letter_Z);
+
+            listOfHangmanParts.Add(hangman_frame_one);
+            listOfHangmanParts.Add(hangman_frame_two);
+            listOfHangmanParts.Add(hangman_frame_three);
+            listOfHangmanParts.Add(hangman_frame_four);
+            listOfHangmanParts.Add(hangman_head);
+            listOfHangmanParts.Add(hangman_body);
+            listOfHangmanParts.Add(hangman_left_arm);
+            listOfHangmanParts.Add(hangman_left_leg);
+            listOfHangmanParts.Add(hangman_right_arm);
+            listOfHangmanParts.Add(hangman_right_leg);
+
+            listOfHangmanFields.Add(hangman_field_one);
+            listOfHangmanFields.Add(hangman_field_two);
+            listOfHangmanFields.Add(hangman_field_three);
+            listOfHangmanFields.Add(hangman_field_four);
+            listOfHangmanFields.Add(hangman_field_five);
+            listOfHangmanFields.Add(hangman_field_six);
+            listOfHangmanFields.Add(hangman_field_seven);
+            listOfHangmanFields.Add(hangman_field_eight);
+            listOfHangmanFields.Add(hangman_field_nine);
+            listOfHangmanFields.Add(hangman_field_ten);
+
+            listOfUnderlines.Add(hangman_underline_one);
+            listOfUnderlines.Add(hangman_underline_two);
+            listOfUnderlines.Add(hangman_underline_three);
+            listOfUnderlines.Add(hangman_underline_four);
+            listOfUnderlines.Add(hangman_underline_five);
+            listOfUnderlines.Add(hangman_underline_six);
+            listOfUnderlines.Add(hangman_underline_seven);
+            listOfUnderlines.Add(hangman_underline_eight);
+            listOfUnderlines.Add(hangman_underline_nine);
+            listOfUnderlines.Add(hangman_underline_ten);
         }
 
         private void PlayGame()
         {
-            Random random = new Random();
-
-            int randomInt = random.Next(questionList.Count);
-
-            selectedQuestion = questionList[randomInt];
-
-            question_label.Text = "Question:   " + selectedQuestion;
+            GetQuestion();
 
             GetAnswerToQuestion();
 
             UpdateFormElements();
+        }
+
+        private void GetQuestion()
+        {
+            Random random = new Random();
+
+            selectedQuestion = questionList[random.Next(questionList.Count)];
+
+            lbl_Question.Text = "Question:  " + selectedQuestion;
         }
 
         private void GetAnswerToQuestion()
@@ -54,200 +126,223 @@ namespace Hangman_Game
 
             switch (selectedQuestion)
             {
-                case "A name of a transport vehicle?": answer = "Car"; break;
+                case "The name of a transport vehicle?": answer = "Car"; break;
                 case "What day is the first of the week?": answer = "Monday"; break;
-                case "What food item is commonly purchased from an takeway?": answer = "Pizza"; break;
-                case "Winne The ... ?": answer = "Pooh"; break;
-                case "Football's coming  ... ?": answer = "Home"; break;
-                default: MessageBox.Show("An error has occurred when attempting to attain answer."); break;
+                case "What is commonly purchased from a takeway?": answer = "Pizza"; break;
+                case "A country shaped like a boot?": answer = "Italy"; break;
+                case "Football's coming... ?": answer = "Home"; break;
+
+                default: throw new Exception($"Unable to find a answer to question {selectedQuestion}.");
+            }
+
+            if (answer.Length > 10)
+            {
+                throw new Exception($"The answer for the question '{selectedQuestion}' exceeds the 10 character limit.");
             }
         }
 
         private void UpdateFormElements()
         {
-            switch (answer.Length)
+            for (int i = 0; i <= answer.Length - 1; i++)
             {
-                case 1: hangman_underline_one.Visible = true; break;
-                case 2: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; break;
-                case 3: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; hangman_underline_three.Visible = true; break;
-                case 4: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; hangman_underline_three.Visible = true; hangman_underline_four.Visible = true; break;
-                case 5: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; hangman_underline_three.Visible = true; hangman_underline_four.Visible = true; hangman_underline_five.Visible = true; break;
-                case 6: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; hangman_underline_three.Visible = true; hangman_underline_four.Visible = true; hangman_underline_five.Visible = true; hangman_underline_six.Visible = true; break;
-                case 7: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; hangman_underline_three.Visible = true; hangman_underline_four.Visible = true; hangman_underline_five.Visible = true; hangman_underline_six.Visible = true; hangman_underline_seven.Visible = true; break;
-                case 8: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; hangman_underline_three.Visible = true; hangman_underline_four.Visible = true; hangman_underline_five.Visible = true; hangman_underline_six.Visible = true; hangman_underline_seven.Visible = true; hangman_underline_eight.Visible = true; break;
-                case 9: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; hangman_underline_three.Visible = true; hangman_underline_four.Visible = true; hangman_underline_five.Visible = true; hangman_underline_six.Visible = true; hangman_underline_seven.Visible = true; hangman_underline_eight.Visible = true; hangman_underline_nine.Visible = true; break;
-                case 10: hangman_underline_one.Visible = true; hangman_underline_two.Visible = true; hangman_underline_two.Visible = true; hangman_underline_three.Visible = true; hangman_underline_four.Visible = true; hangman_underline_five.Visible = true; hangman_underline_six.Visible = true; hangman_underline_seven.Visible = true; hangman_underline_eight.Visible = true; hangman_underline_nine.Visible = true; hangman_underline_ten.Visible = true; break;
+                listOfUnderlines[i].Visible = true;
+            }
+        }
 
-                default: MessageBox.Show("An error has occurred while attempting to make the hangman fields visible"); break;
+        private void Letter_Clicked(object sender, EventArgs e)
+        {
+            Label letter = sender as Label;
+
+            char[] alphabetArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+
+            for (int i = 0; i <= alphabetArray.Length - 1; i++)
+            {
+                try
+                {
+                    if (letter.Text == alphabetArray[i].ToString())
+                    {
+                        CheckForLetters(alphabetArray[i]);
+                        break;
+                    }
+                }
+                catch
+                {
+                    throw new Exception("Error attempting to pass letter into CheckForLetters Function.");
+                }
+            }
+        }
+
+        // If the player presses a letter on the keyboard rather than clicking with the mouse.
+        private void HangmanForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Debug.WriteLine("KeyCode: " + e.KeyChar);
+
+            char[] alphabetArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+
+            for (int i = 0; i <= alphabetArray.Length - 1; i++)
+            {
+                try
+                {
+                    if (char.ToUpper(e.KeyChar) == alphabetArray[i])
+                    {
+                        CheckForLetters(alphabetArray[i]); break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error attempting to pass letter into CheckForLetters Function: " + ex);
+                }
             }
         }
 
         private void CheckForLetters(char letterClicked)
         {
-            char[] result = answer.ToLower().ToCharArray();
-
-            Debug.WriteLine("Result Length: " + result.Length);
-
-            if (answer.ToLower().Contains(letterClicked))
+            if (gameCompeleted == true)
             {
-                if (result.Length >= 1) { if (letterClicked == result[0]) { hangman_field_one.Text = letterClicked.ToString().ToUpper(); hangman_field_one.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 2) { if (letterClicked == result[1]) { hangman_field_two.Text = letterClicked.ToString(); hangman_field_two.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 3) { if (letterClicked == result[2]) { hangman_field_three.Text = letterClicked.ToString(); hangman_field_three.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 4) { if (letterClicked == result[3]) { hangman_field_four.Text = letterClicked.ToString(); hangman_field_four.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 5) { if (letterClicked == result[4]) { hangman_field_five.Text = letterClicked.ToString(); hangman_field_five.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 6) { if (letterClicked == result[5]) { hangman_field_six.Text = letterClicked.ToString(); hangman_field_six.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 7) { if (letterClicked == result[6]) { hangman_field_seven.Text = letterClicked.ToString(); hangman_field_seven.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 8) { if (letterClicked == result[7]) { hangman_field_eight.Text = letterClicked.ToString(); hangman_field_eight.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 9) { if (letterClicked == result[8]) { hangman_field_nine.Text = letterClicked.ToString(); hangman_field_nine.Visible = true; numOfCorrectGuesses++; } }
-                if (result.Length >= 10) { if (letterClicked == result[9]) { hangman_field_ten.Text = letterClicked.ToString(); hangman_field_ten.Visible = true; numOfCorrectGuesses++; } }
-               
-                // Change colour to green if correct
-                switch (Char.ToLower(letterClicked))
-                {
-                    case 'a': letter_a_label.ForeColor = Color.Green; break;
-                    case 'b': letter_b_label.ForeColor = Color.Green; break;
-                    case 'c': letter_c_label.ForeColor = Color.Green; break;
-                    case 'd': letter_d_label.ForeColor = Color.Green; break;
-                    case 'e': letter_e_label.ForeColor = Color.Green; break;
-                    case 'f': letter_f_label.ForeColor = Color.Green; break;
-                    case 'g': letter_g_label.ForeColor = Color.Green; break;
-                    case 'h': letter_h_label.ForeColor = Color.Green; break;
-                    case 'i': letter_i_label.ForeColor = Color.Green; break;
-                    case 'j': letter_j_label.ForeColor = Color.Green; break;
-                    case 'k': letter_k_label.ForeColor = Color.Green; break;
-                    case 'm': letter_m__label.ForeColor = Color.Green; break;
-                    case 'n': letter_n_label.ForeColor = Color.Green; break;
-                    case 'o': letter_o_label.ForeColor = Color.Green; break;
-                    case 'p': letter_p_label.ForeColor = Color.Green; break;
-                    case 'q': letter_q_label.ForeColor = Color.Green; break;
-                    case 'r': letter_r_label.ForeColor = Color.Green; break;
-                    case 's': letter_s_label.ForeColor = Color.Green; break;
-                    case 't': letter_t_label.ForeColor = Color.Green; break;
-                    case 'u': letter_u_label.ForeColor = Color.Green; break;
-                    case 'v': letter_v_label.ForeColor = Color.Green; break;
-                    case 'w': letter_w_label.ForeColor = Color.Green; break;
-                    case 'x': letter_x_label.ForeColor = Color.Green; break;
-                    case 'y': letter_y_label.ForeColor = Color.Green; break;
-                    case 'z': letter_z_label.ForeColor = Color.Green; break;
-                }                 
+                lbl_RestartMessage.ForeColor = Color.Yellow;
+                lbl_RestartMessage.Text = "Please click 'Reset' to start a new game.";
 
-                if(numOfCorrectGuesses == answer.Length)
+                return;
+            }
+
+            lbl_Message.Text = String.Empty;
+            lbl_Message.ForeColor = Color.White;
+
+            char[] result = answer.ToUpper().ToCharArray();
+
+            if (chosenLetters.Contains(letterClicked))
+            {
+                lbl_Message.ForeColor = Color.Yellow;
+                lbl_Message.Text = ($"The letter '{letterClicked}' has already been chosen.");
+                return;
+            }
+
+            if (answer.ToUpper().Contains(letterClicked))
+            {
+                for (int i = 0; i <= result.Length - 1; i++)
                 {
-                    MessageBox.Show("You Win!");
-                    ResetGameElements();                
+                    if (letterClicked == result[i])
+                    {
+                        if (result[i] == result[0])
+                        {
+                            listOfHangmanFields[i].Text = letterClicked.ToString();
+                        }
+                        else
+                        {
+                            listOfHangmanFields[i].Text = letterClicked.ToString().ToLower();
+                        }
+
+                        listOfHangmanFields[i].Visible = true;
+                        chosenLetters.Add(letterClicked);
+                        numOfCorrectGuesses++;
+                        break;
+                    }
+                }
+
+                lbl_NumOfCorrectGuesses.Text = "Number of Correct Guesses: " + numOfCorrectGuesses;
+
+                // change color to green if the guess is incorrect.
+                for (int i = 0; i <= listOfLetterLabels.Count - 1; i++)
+                {
+                    if (letterClicked == listOfLetterLabels[i].Text.ToCharArray()[0])
+                    {
+                        listOfLetterLabels[i].ForeColor = Color.Green; break;
+                    }
+                }
+
+                if (numOfCorrectGuesses == answer.Length)
+                {
+                    lbl_NumOfTotalGuesses.Text = "Total Guesses: " + (numOfCorrectGuesses + numOfIncorrectGuesses).ToString();
+
+                    lbl_Message.ForeColor = Color.DarkGreen;
+                    lbl_Message.Text = "You Win!";
+                    gameCompeleted = true;
+
+                    return;
                 }
             }
             else
             {
-                numOfIncorrectAttempts++;
+                numOfIncorrectGuesses++;
 
-                switch(numOfIncorrectAttempts)
+                lbl_NumOfWrongGuesses.Text = "Number of Wrong Guesses: " + numOfIncorrectGuesses;
+
+                chosenLetters.Add(letterClicked);
+
+                // make a hangman part visible
+                for (int i = 1; i <= listOfHangmanParts.Count; i++)
                 {
-                    case 1: hangman_object_one.Visible = true; break;
-                    case 2: hangman_object_two.Visible = true; break;
-                    case 3: hangman_object_three.Visible = true; break;
-                    case 4: hangman_object_four.Visible = true; break;
-                    case 5: hangman_object_five.Visible = true; break;
-                    case 6: hangman_object_six.Visible = true; break;
-                    case 7: hangman_object_seven.Visible = true; break;
-                    case 8: hangman_object_eight.Visible = true; break;
-                    case 9: hangman_object_nine.Visible = true; break;
-                    case 10: hangman_object_ten.Visible = true; break;
+                    if (numOfIncorrectGuesses == i)
+                    {
+                        listOfHangmanParts[i - 1].Visible = true; break;
+                    }
                 }
 
-                // change color to red if incorrect.
-                switch (Char.ToLower(letterClicked))
+                // change color to red if the guess is incorrect.
+                for (int i = 0; i <= listOfLetterLabels.Count - 1; i++)
                 {
-                    case 'a': letter_a_label.ForeColor = Color.Red; break;
-                    case 'b': letter_b_label.ForeColor = Color.Red; break;
-                    case 'c': letter_c_label.ForeColor = Color.Red; break;
-                    case 'd': letter_d_label.ForeColor = Color.Red; break;
-                    case 'e': letter_e_label.ForeColor = Color.Red; break;
-                    case 'f': letter_f_label.ForeColor = Color.Red; break;
-                    case 'g': letter_g_label.ForeColor = Color.Red; break;
-                    case 'h': letter_h_label.ForeColor = Color.Red; break;
-                    case 'i': letter_i_label.ForeColor = Color.Red; break;
-                    case 'j': letter_j_label.ForeColor = Color.Red; break;
-                    case 'k': letter_k_label.ForeColor = Color.Red; break;
-                    case 'm': letter_m__label.ForeColor = Color.Red; break;
-                    case 'n': letter_n_label.ForeColor = Color.Red; break;
-                    case 'o': letter_o_label.ForeColor = Color.Red; break;
-                    case 'p': letter_p_label.ForeColor = Color.Red; break;
-                    case 'q': letter_q_label.ForeColor = Color.Red; break;
-                    case 'r': letter_r_label.ForeColor = Color.Red; break;
-                    case 's': letter_s_label.ForeColor = Color.Red; break;
-                    case 't': letter_t_label.ForeColor = Color.Red; break;
-                    case 'u': letter_u_label.ForeColor = Color.Red; break;
-                    case 'v': letter_v_label.ForeColor = Color.Red; break;
-                    case 'w': letter_w_label.ForeColor = Color.Red; break;
-                    case 'x': letter_x_label.ForeColor = Color.Red; break;
-                    case 'y': letter_y_label.ForeColor = Color.Red; break;
-                    case 'z': letter_z_label.ForeColor = Color.Red; break;
+                    if (letterClicked == listOfLetterLabels[i].Text.ToCharArray()[0])
+                    {
+                        listOfLetterLabels[i].ForeColor = Color.Red; break;
+                    }
                 }
             }
-           
-            if (numOfIncorrectAttempts >= 10) // change this depending on how many attemps there are.
+
+            lbl_NumOfTotalGuesses.Text = "Total Guesses: " + (numOfCorrectGuesses + numOfIncorrectGuesses).ToString();
+
+            if (numOfIncorrectGuesses >= 10) // The player has 10 attempts to guess before game over.
             {
-                MessageBox.Show("You are out of attempts! Game Over.");
-                ResetGameElements();
+                lbl_Message.ForeColor = Color.Red;
+                lbl_Message.Text = "You are out of guesses! You Lose.";
+                gameCompeleted = true;
+
+                return;
             }
 
-            Debug.WriteLine("Num of Correct Guesses: " + numOfCorrectGuesses);
+            Debug.WriteLine("Chosen Letters: " + string.Join(", ", chosenLetters));
         }
 
         private void ResetGameElements()
         {
             var labels = this.Controls.OfType<Label>();
 
-            foreach(var label in labels)
+            foreach (var label in labels)
             {
-                if(label.Name.Contains("letter"))
+                if (label.Name.Contains("lbl_Letter") || label.Name.Contains("lbl_Message") || label.Name.Contains("lbl_RestartMesssage"))
                 {
                     label.ForeColor = Color.White;
                 }
             }
 
-            hangman_object_one.Visible = false;
-            hangman_object_two.Visible = false;
-            hangman_object_three.Visible = false;
-            hangman_object_four.Visible = false;
-            hangman_object_five.Visible = false;
-            hangman_object_six.Visible = false;
-            hangman_object_seven.Visible = false;
-            hangman_object_eight.Visible = false;
-            hangman_object_nine.Visible = false;
-            hangman_object_ten.Visible = false;
+            for (int i = 0; i <= listOfHangmanParts.Count - 1; i++)
+            {
+                listOfHangmanParts[i].Visible = false;
+            }
 
-            hangman_field_one.Visible = false;
-            hangman_field_two.Visible = false;
-            hangman_field_three.Visible = false;
-            hangman_field_four.Visible = false;
-            hangman_field_five.Visible = false;
-            hangman_field_six.Visible = false;
-            hangman_field_seven.Visible = false;
-            hangman_field_eight.Visible = false;
-            hangman_field_nine.Visible = false;
-            hangman_field_ten.Visible = false;
+            for (int i = 0; i <= listOfHangmanFields.Count - 1; i++)
+            {
+                listOfHangmanFields[i].Visible = false;
+            }
 
-            hangman_underline_one.Visible = false;
-            hangman_underline_two.Visible = false;
-            hangman_underline_three.Visible = false;
-            hangman_underline_four.Visible = false;
-            hangman_underline_five.Visible = false;
-            hangman_underline_six.Visible = false;
-            hangman_underline_seven.Visible = false;
-            hangman_underline_seven.Visible = false;
-            hangman_underline_eight.Visible = false;
-            hangman_underline_nine.Visible = false;
-            hangman_underline_ten.Visible = false;
-        
+            for (int i = 0; i <= listOfUnderlines.Count - 1; i++)
+            {
+                listOfUnderlines[i].Visible = false;
+            }
+
             selectedQuestion = String.Empty;
-            question_label.Text = String.Empty;
+            lbl_Question.Text = String.Empty;
+            lbl_Message.Text = String.Empty;
+            lbl_RestartMessage.Text = String.Empty;
+            chosenLetters.Clear();
 
-            numOfIncorrectAttempts = 0;
+            numOfIncorrectGuesses = 0;
             numOfCorrectGuesses = 0;
 
-            PlayGame();
+            lbl_NumOfCorrectGuesses.Text = "Number of Correct Guesses: " + numOfCorrectGuesses;
+            lbl_NumOfWrongGuesses.Text = "Number of Wrong Guesses: " + numOfCorrectGuesses;
+            lbl_NumOfTotalGuesses.Text = "Total Guesses: " + 0;
+
+            gameCompeleted = false;
         }
 
         private void Reset_Game_Button(object sender, EventArgs e)
@@ -257,36 +352,9 @@ namespace Hangman_Game
             PlayGame();
         }
 
-        private void Exit_Button(object sender, EventArgs e)
+        private void Exit_Program(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-        private void Letter_A_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'a'; CheckForLetters(letterClicked); }
-        private void Letter_B_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'b'; CheckForLetters(letterClicked); }
-        private void Letter_C_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'c'; CheckForLetters(letterClicked); }
-        private void Letter_D_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'd'; CheckForLetters(letterClicked); }
-        private void Letter_E_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'e'; CheckForLetters(letterClicked); }
-        private void Letter_F_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'f'; CheckForLetters(letterClicked); }
-        private void Letter_G_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'g'; CheckForLetters(letterClicked); }
-        private void Letter_H_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'h'; CheckForLetters(letterClicked); }
-        private void Letter_I_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'i'; CheckForLetters(letterClicked); }
-        private void Letter_J_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'j'; CheckForLetters(letterClicked); }
-        private void Letter_K_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'k'; CheckForLetters(letterClicked); }
-        private void Letter_L_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'l'; CheckForLetters(letterClicked); }
-        private void Letter_M_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'm'; CheckForLetters(letterClicked); }
-        private void Letter_N_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'n'; CheckForLetters(letterClicked); }
-        private void Letter_O_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'o'; CheckForLetters(letterClicked); }
-        private void Letter_P_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'p'; CheckForLetters(letterClicked); }
-        private void Letter_Q_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'q'; CheckForLetters(letterClicked); }
-        private void Letter_R_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'r'; CheckForLetters(letterClicked); }
-        private void Letter_S_Label_Clicked(object sender, EventArgs e) { char letterClicked = 's'; CheckForLetters(letterClicked); }
-        private void Letter_T_Label_Clicked(object sender, EventArgs e) { char letterClicked = 't'; CheckForLetters(letterClicked); }
-        private void Letter_U_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'u'; CheckForLetters(letterClicked); }
-        private void Letter_V_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'v'; CheckForLetters(letterClicked); }
-        private void Letter_W_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'w'; CheckForLetters(letterClicked); }
-        private void Letter_X_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'x'; CheckForLetters(letterClicked); }
-        private void Letter_Y_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'y'; CheckForLetters(letterClicked); }
-        private void Letter_Z_Label_Clicked(object sender, EventArgs e) { char letterClicked = 'z'; CheckForLetters(letterClicked); }
     }
 }

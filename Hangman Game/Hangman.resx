@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="hangman_object_five.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_head.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJsAAAB6CAYAAACoeSGrAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAACWxJREFUeF7t3a2T
@@ -165,7 +165,7 @@
         /wFj0LVql0wEAAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="hangman_object_one.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_frame_one.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAWAAAAATCAYAAACuoNeXAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAAAKlJREFUeF7t2yGO
@@ -174,7 +174,7 @@
         ua1bjSOPAHAut3WrcbQ/OgA4k9u61QjAfTUCcF+NANxXIwC3vZ8vOjIA7B2O3kgAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="hangman_object_two.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_frame_two.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABwAAAGhCAYAAAByLtSLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAABB9JREFUeF7t3bFt
@@ -198,7 +198,7 @@
         dFBD08HooIbm/x/8LRo+k4bPpOHz3N/+AKwUkEB8ZqUYAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="hangman_object_three.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_frame_three.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAASsAAAAVCAYAAAAeo8jdAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAAAKtJREFUeF7t2iEW
@@ -208,7 +208,7 @@
         gg==
 </value>
   </data>
-  <data name="hangman_object_four.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_frame_four.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABwAAAGhCAYAAAByLtSLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAABB9JREFUeF7t3bFt
@@ -232,7 +232,7 @@
         dFBD08HooIbm/x/8LRo+k4bPpOHz3N/+AKwUkEB8ZqUYAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="hangman_object_six.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_body.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABwAAAGhCAYAAAByLtSLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAABB9JREFUeF7t3bFt
@@ -256,7 +256,7 @@
         dFBD08HooIbm/x/8LRo+k4bPpOHz3N/+AKwUkEB8ZqUYAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="hangman_object_seven.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_left_arm.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAG4AAABSCAYAAAC14+EtAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAAAqRJREFUeF7t3Sty
@@ -274,7 +274,7 @@
         GCV21ewHt7y7cQAjGUEAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="hangman_object_eight.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_left_leg.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAG4AAABSCAYAAAC14+EtAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAAAqRJREFUeF7t3Sty
@@ -292,7 +292,7 @@
         GCV21ewHt7y7cQAjGUEAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="hangman_object_nine.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_right_arm.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGcAAABSCAYAAABJ9srnAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAABmNJREFUeF7tnOtL
@@ -326,7 +326,7 @@
         E5C4fwB+SjaNCumAQAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="hangman_object_ten.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="hangman_right_leg.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGcAAABSCAYAAABJ9srnAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS4xYyqcSwAABmNJREFUeF7tnOtL
